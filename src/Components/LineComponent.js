@@ -4,16 +4,13 @@ class LineComponent extends Component {
     constructor(props){
         super(props)
         this.state={
-            isChecked: false,
-            value: 'text'
+            isChecked: false
         }
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
+    handleChange() {
         console.log(this.state.isChecked)
-        this.state.isChecked ? this.setState({value: 'unchecked'}):this.setState({value: 'checked'})
-        this.setState({isChecked: !this.state.isChecked})
     }
 
 
@@ -21,8 +18,11 @@ class LineComponent extends Component {
         return (
             <div>
                 <div>
-                    <input checked={this.state.isChecked} type={"checkbox"} onChange={this.handleChange}/>
-                    <text>{this.state.value}</text>
+                    <input
+                        checked={this.state.isChecked}
+                        type={"checkbox"}
+                        onChange={this.handleChange}/>
+                    {this.props.taskName}
                     <button>удалить</button>
                 </div>
             </div>
