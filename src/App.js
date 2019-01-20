@@ -21,14 +21,27 @@ class App extends Component {
             todos:[...this.state.todos, {name:taskName, id:this.state.id}],
             id: this.state.id + 1
         })
+        console.log(this.state.id)
+    }
+
+    deleteTask = id =>{
+        console.log( 'handle delete' + id)
+        const remainingToDos = this.state.todos.filter((todo) => {
+           return todo.id !== id
+        });
+        this.setState({
+            todos: remainingToDos
+        })
     }
 
   render() {
       const todoItems = this.state.todos.map((t)=>
           (<LineComponent
               taskName={t.name}
-              key={t.id}
-              addItem ={this.addItem()}/>
+              id={t.id}
+              key={t.name+t.id}
+              addItem ={this.addItem()}
+              deleteTask = {this.deleteTask.bind(this)}/>
           )
       )
     return (

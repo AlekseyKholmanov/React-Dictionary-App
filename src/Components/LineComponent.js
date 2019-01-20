@@ -7,25 +7,26 @@ class LineComponent extends Component {
             isChecked: false
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleChange() {
         console.log(this.state.isChecked)
     }
-
+    handleDelete = () => {
+        this.props.deleteTask(this.props.id)
+    }
 
     render(){
         return (
-            <div>
-                <div>
+                <div >
                     <input
                         checked={this.state.isChecked}
                         type={"checkbox"}
                         onChange={this.handleChange}/>
                     {this.props.taskName}
-                    <button>удалить</button>
+                    <button onClick={this.handleDelete}>удалить</button>
                 </div>
-            </div>
             )
     }
 }

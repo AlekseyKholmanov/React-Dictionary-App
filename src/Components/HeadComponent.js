@@ -28,7 +28,7 @@ class HeadComponent extends Component {
 
     render(){
         return(
-            <div className={"LineComponent"}>
+            <div className={"LineComponent"} >
                 <div>
                     <input type={"text"} onChange={this.handleChange} value={this.state.taskName}></input>
                 </div>
