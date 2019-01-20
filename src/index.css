@@ -1,3 +1,6 @@
-.LineComponent div{
+.todoItem *{
   display: inline;
+}
+.lineThroughtText{
+  text-decoration: line-through;
 }

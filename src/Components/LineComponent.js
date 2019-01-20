@@ -16,12 +16,12 @@ class LineComponent extends Component {
 
     render(){
         return (
-                <div >
+                <div className={"todoItem"}>
                     <input
                         checked={this.props.checked}
                         type={"checkbox"}
                         onChange={this.handleChange}/>
-                    {this.props.taskName}
+                    <div className = {this.props.checked ? "lineThroughtText" : ""}>{this.props.taskName}</div>
                     <button onClick={this.handleDelete}>удалить</button>
                 </div>
             )
