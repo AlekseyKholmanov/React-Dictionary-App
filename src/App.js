@@ -44,21 +44,20 @@ class App extends Component {
     }
 
   render() {
-      const checkedItems = this.state.todos.map((t)=>{
-          if(t.checked)
-              return (<LineComponent taskName={t.name} checked={t.checked} id={t.id} key={t.name+t.id} deleteTask = {this.deleteTask.bind(this)} checkTask = {this.checkTask.bind(this)}/>)
-      })
+      const checkedItems = this.state.todos.filter((t)=>{
+          return t.checked===true}).map((t)=>
+          (<LineComponent taskName={t.name} checked={t.checked} id={t.id} key={t.name+t.id} deleteTask = {this.deleteTask.bind(this)} checkTask = {this.checkTask.bind(this)}/>))
 
-      const unchekedItem = this.state.todos.map((t)=>{
-          if(!t.checked)
-              return (<LineComponent taskName={t.name} checked={t.checked} id={t.id} key={t.name+t.id} deleteTask = {this.deleteTask.bind(this)} checkTask = {this.checkTask.bind(this)}/>)
-      })
+      const unchekedItem = this.state.todos.filter((t)=>{
+          return t.checked!==true}).map((t)=>
+          (<LineComponent taskName={t.name} checked={t.checked} id={t.id} key={t.name+t.id} deleteTask = {this.deleteTask.bind(this)} checkTask = {this.checkTask.bind(this)}/>))
     return (
       <div>
           <HeadComponent handleAdd={this.handleAdd.bind(this)}/>
           {unchekedItem}
-          {<hr/> && unchekedItem.length > 0 && checkedItems.length > 0}
+          {unchekedItem.length > 0 && checkedItems.length > 0 && <hr/>}
           {checkedItems}
+          {console.log("un: " + unchekedItem.length + "check: " + checkedItems.length )}
       </div>
     )
   }
