@@ -11,14 +11,11 @@ class App extends Component {
         }
     }
 
-    addItem = () => {
-        console.log('Hello Add Item')
-    }
-
     handleAdd = (taskName) =>{
-        console.log( 'from header')
         this.setState({
-            todos:[...this.state.todos, {name:taskName, id:this.state.id}],
+            todos:
+                [...this.state.todos,
+                {name:taskName, id:this.state.id, checked:false}],
             id: this.state.id + 1
         })
         console.log(this.state.id)
@@ -34,14 +31,27 @@ class App extends Component {
         })
     }
 
+    checkTask = id =>{
+        console.log("this "+ id + " is checking")
+        const checkedTodos = this.state.todos.map((todo) => {
+            if(todo.id===id)
+                todo.checked = !todo.checked
+            return todo
+        })
+        this.setState({
+            todos:checkedTodos
+        })
+    }
+
   render() {
       const todoItems = this.state.todos.map((t)=>
           (<LineComponent
               taskName={t.name}
+              checked={t.checked}
               id={t.id}
               key={t.name+t.id}
-              addItem ={this.addItem()}
-              deleteTask = {this.deleteTask.bind(this)}/>
+              deleteTask = {this.deleteTask.bind(this)}
+              checkTask = {this.checkTask.bind(this)}/>
           )
       )
     return (

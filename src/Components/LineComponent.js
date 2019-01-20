@@ -3,15 +3,12 @@ import React, { Component } from 'react'
 class LineComponent extends Component {
     constructor(props){
         super(props)
-        this.state={
-            isChecked: false
-        }
         this.handleChange = this.handleChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
 
-    handleChange() {
-        console.log(this.state.isChecked)
+    handleChange = () =>{
+        this.props.checkTask(this.props.id)
     }
     handleDelete = () => {
         this.props.deleteTask(this.props.id)
@@ -21,7 +18,7 @@ class LineComponent extends Component {
         return (
                 <div >
                     <input
-                        checked={this.state.isChecked}
+                        checked={this.props.checked}
                         type={"checkbox"}
                         onChange={this.handleChange}/>
                     {this.props.taskName}
