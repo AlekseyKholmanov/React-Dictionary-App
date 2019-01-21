@@ -6,12 +6,12 @@ class App extends Component {
     constructor(props){
         super(props)
         this.state={
-            todos:[],
+            todos: [],
             id: 0
         }
     }
 
-    handleAdd = (taskName) =>{
+    handleAdd = (taskName) => {
         this.setState({
             todos:
                 [...this.state.todos,
@@ -21,7 +21,7 @@ class App extends Component {
         console.log(this.state.id)
     }
 
-    deleteTask = id =>{
+    deleteTask = id => {
         console.log( 'handle delete' + id)
         const remainingToDos = this.state.todos.filter((todo) => {
            return todo.id !== id
@@ -31,10 +31,10 @@ class App extends Component {
         })
     }
 
-    checkTask = id =>{
+    checkTask = id => {
         console.log("item "+ id + " is checking")
         const checkedTodos = this.state.todos.map((todo) => {
-            if(todo.id===id)
+            if(todo.id === id)
                 todo.checked = !todo.checked
             return todo
         })
@@ -44,20 +44,32 @@ class App extends Component {
     }
 
   render() {
-      const checkedItems = this.state.todos.filter((t)=>{
-          return t.checked===true}).map((t)=>
-          (<LineComponent taskName={t.name} checked={t.checked} id={t.id} key={t.name+t.id} deleteTask = {this.deleteTask.bind(this)} checkTask = {this.checkTask.bind(this)}/>))
+      const checkedItems = this.state.todos.filter(t => {
+          return t.checked === true}).map(t =>
+          (<LineComponent
+              taskName={t.name}
+              checked={t.checked}
+              id={t.id} key={t.name+t.id}
+              deleteTask = {this.deleteTask}
+              checkTask = {this.checkTask}/>))
 
-      const unchekedItem = this.state.todos.filter((t)=>{
-          return t.checked!==true}).map((t)=>
-          (<LineComponent taskName={t.name} checked={t.checked} id={t.id} key={t.name+t.id} deleteTask = {this.deleteTask.bind(this)} checkTask = {this.checkTask.bind(this)}/>))
+      const unchekedItem = this.state.todos.filter(t => {
+          return t.checked !== true}).map(t =>
+          (<LineComponent
+              taskName={t.name}
+              checked={t.checked}
+              id={t.id}
+              key={t.name+t.id}
+              deleteTask = {this.deleteTask}
+              checkTask = {this.checkTask}/>))
+
+      console.log("un: " + unchekedItem.length + "check: " + checkedItems.length )
     return (
       <div>
           <HeadComponent handleAdd={this.handleAdd.bind(this)}/>
           {unchekedItem}
           {unchekedItem.length > 0 && checkedItems.length > 0 && <hr/>}
           {checkedItems}
-          {console.log("un: " + unchekedItem.length + "check: " + checkedItems.length )}
       </div>
     )
   }

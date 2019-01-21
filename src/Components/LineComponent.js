@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 
 class LineComponent extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.handleChange = this.handleChange.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleChange = () =>{
